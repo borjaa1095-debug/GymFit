@@ -1,3 +1,5 @@
+package UsersAuth;
+
 public class Trainer extends User {
 
     private String specialization;

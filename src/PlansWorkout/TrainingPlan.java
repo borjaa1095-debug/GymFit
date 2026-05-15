@@ -1,3 +1,5 @@
+package PlansWorkout;
+
 import java.util.List;
 
 public class TrainingPlan {

@@ -1,3 +1,5 @@
+package PlansWorkout;
+
 public class Workout {
     String workoutName;
     String workoutDescription;
@@ -32,6 +34,7 @@ public class Workout {
     public void setWorkoutDurationMin(int workoutDurationMin) {
         this.workoutDurationMin = workoutDurationMin;
     }
+
 
     void displayWorkoutInfo() {
         System.out.println("Workout Name: " + workoutName);
