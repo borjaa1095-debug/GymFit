@@ -3,13 +3,13 @@ public abstract class User {
     private String username;
     private String email;
     private int id;
-
     private String password;
 
-    public User(String username, String email, int id) {
+    public User(String username, String email, int id, String password) {
         this.username = username;
         this.email = email;
         this.id = id;
+        this.password = password;
     }
 
     public String getUsername() {
@@ -36,13 +36,9 @@ public abstract class User {
         this.id = id;
     }
 
-    public String getPassword() {
-        return password;
-    }
+    public String getPassword() {return password; }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    public void setPassword(String password) { this.password = password; }
 
 
 }
