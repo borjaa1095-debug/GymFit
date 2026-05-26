@@ -1,6 +1,6 @@
 package UsersAuth;
 
-public class Trainer extends User {
+public class Trainer extends UserBase {
 
     private String specialization;
     public Trainer(String username, String email, int id, String password, String specialization) {
@@ -15,4 +15,11 @@ public class Trainer extends User {
         this.specialization = specialization;
     }
 
+
+
+
+    @Override
+    public boolean register(String file) {
+        return false;
+    }
 }
