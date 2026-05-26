@@ -36,7 +36,7 @@ public class Workout {
     }
 
 
-    void displayWorkoutInfo() {
+    public void displayWorkoutInfo() {
         System.out.println("Workout Name: " + workoutName);
         System.out.println("Description: " + workoutDescription);
         System.out.println("Duration (min): " + workoutDurationMin);
