@@ -9,9 +9,6 @@ public static void main(String[] args) {
     Workout workout1 = new Workout("Push-ups", "10 push-ups 3 series", 30);
 
     TrainingPlan.addWorkout(workout1);
-
-    Workout Workout = new Workout("Push-ups", "10 push-ups 3 series", 30);
-
-    Workout.displayWorkoutInfo();
+    workout1.displayWorkoutInfo();
 
 }
