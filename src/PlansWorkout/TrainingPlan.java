@@ -38,6 +38,4 @@ public class TrainingPlan {
             System.out.println("Error");
         }
     }
-
-
 }

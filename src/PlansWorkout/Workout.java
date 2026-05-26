@@ -50,4 +50,5 @@ public class Workout {
             System.out.println("Error");
         }
     }
+
 }
