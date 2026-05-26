@@ -1,5 +1,6 @@
 import PlansWorkout.TrainingPlan;
 import PlansWorkout.Workout;
+import SessionPayment.SessionMenu;
 
 public static void main(String[] args) {
     System.out.println("prueba super numero uno");
@@ -11,4 +12,6 @@ public static void main(String[] args) {
     TrainingPlan.addWorkout(workout1);
     workout1.displayWorkoutInfo();
 
+    SessionMenu sessionMenu = new SessionMenu();
+    sessionMenu.showMenu();
 }
