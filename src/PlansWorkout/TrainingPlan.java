@@ -1,5 +1,8 @@
 package PlansWorkout;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 public class TrainingPlan {
@@ -27,7 +30,14 @@ public class TrainingPlan {
         this.workouts = workouts;
     }
 
-    void addWorkout(Workout workout) {
+    public void addWorkout(Workout workout) {
         workouts.add(workout);
+        try (PrintWriter printWriter = new PrintWriter(new FileWriter("src/PlansWorkout/workouts.txt", true))) {
+            printWriter.println(workout.getWorkoutName() + ", " + workout.getWorkoutDescription() + ", " + workout.getWorkoutDurationMin());
+        } catch (IOException e) {
+            System.out.println("Error");
+        }
     }
+
+
 }

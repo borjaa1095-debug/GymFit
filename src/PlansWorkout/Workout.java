@@ -1,5 +1,9 @@
 package PlansWorkout;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class Workout {
     String workoutName;
     String workoutDescription;
@@ -35,10 +39,15 @@ public class Workout {
         this.workoutDurationMin = workoutDurationMin;
     }
 
-
-    void displayWorkoutInfo() {
-        System.out.println("Workout Name: " + workoutName);
-        System.out.println("Description: " + workoutDescription);
-        System.out.println("Duration (min): " + workoutDurationMin);
+    public void displayWorkoutInfo() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/PlansWorkout/workouts.txt"))) {
+            String linea;
+            System.out.println("Workout Information");
+            while ((linea = reader.readLine()) != null) {
+                System.out.println(linea);
+            }
+        } catch (IOException e) {
+            System.out.println("Error");
+        }
     }
 }
