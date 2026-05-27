@@ -3,15 +3,16 @@ package PlansWorkout;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TrainingPlan {
     String goal;
     List<Workout> workouts;
 
-    public TrainingPlan(String goal, List<Workout> workouts) {
+    public TrainingPlan(String goal) {
         this.goal = goal;
-        this.workouts = workouts;
+        this.workouts = new ArrayList<>();
     }
 
     public String getGoal() {

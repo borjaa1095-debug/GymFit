@@ -5,13 +5,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
-public class Workout extends TrainingPlan {
+public class Workout{
     String workoutName;
     String workoutDescription;
     int workoutDurationMin;
 
-    public Workout(String goal, List<Workout> workouts, String workoutName, String workoutDescription, int workoutDurationMin) {
-        super(goal, workouts);
+    public Workout(String workoutName, String workoutDescription, int workoutDurationMin) {
         this.workoutName = workoutName;
         this.workoutDescription = workoutDescription;
         this.workoutDurationMin = workoutDurationMin;
