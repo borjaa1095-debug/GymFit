@@ -3,7 +3,7 @@ package PlansWorkout;
 import java.util.Scanner;
 
 public class TrainingMenu {
-    public void displayMenu() {
+    public void displayMenu(boolean isTrainer) {
         Scanner sc = new Scanner(System.in);
         int opc = 0;
         TrainingPlan lastPlan = null;
@@ -18,23 +18,30 @@ public class TrainingMenu {
 
             switch (opc) {
                 case 1:
-                    System.out.println("Creating a new training plan...");
-                    System.out.println("Enter the workout name:");
-                    String name = sc.nextLine();
-                    System.out.println("Enter the workout description:");
-                    String description = sc.nextLine();
-                    System.out.println("Enter the workout duration in minutes:");
-                    int duration = sc.nextInt();
-                    sc.nextLine();
-                    System.out.println("Enter the training goal:");
-                    String goal = sc.nextLine();
-                    sc.nextLine();
+                    if(isTrainer)
+                    {
+                        System.out.println("Creating a new training plan...");
+                        System.out.println("Enter the workout name:");
+                        String name = sc.nextLine();
+                        System.out.println("Enter the workout description:");
+                        String description = sc.nextLine();
+                        System.out.println("Enter the workout duration in minutes:");
+                        int duration = sc.nextInt();
+                        sc.nextLine();
+                        System.out.println("Enter the training goal:");
+                        String goal = sc.nextLine();
 
-                    Workout workout = new Workout(name, description, duration);
-                    lastPlan = new TrainingPlan(goal);
-                    lastPlan.addWorkout(workout);
-                    System.out.println("Plan saved!");
-                    break;
+                        Workout workout = new Workout(name, description, duration);
+                        lastPlan = new TrainingPlan(goal);
+                        lastPlan.addWorkout(workout);
+                        System.out.println("Plan saved!");
+                        break;
+                    }
+                    else
+                    {
+                        System.out.println("Only trainers can create workout plans.");
+                    }
+
                 case 2:
                     System.out.println("Viewing existing training plans...");
                     Workout temp = new Workout("", "", 0);

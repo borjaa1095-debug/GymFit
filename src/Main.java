@@ -1,11 +1,5 @@
 import PlansWorkout.TrainingMenu;
 import UsersAuth.User;
-import UsersAuth.User;
-import UsersAuth.Trainer;
-import PlansWorkout.TrainingPlan;
-import PlansWorkout.Workout;
-import SessionPayment.ClassSession;
-import SessionPayment.Payment;
 import ForumIntegration.ForumPost;
 
 public static void main(String[] args) {
@@ -13,6 +7,7 @@ public static void main(String[] args) {
     String filePathUsers = "Users.txt";
     String filePathTrainers = "Trainers.txt";
     String ans = "";
+    boolean isTrainer = false;
     System.out.println("Welcome to C Gym Fit!");
 
 
@@ -24,7 +19,6 @@ public static void main(String[] args) {
         ans = sc.nextLine();
 
         if (ans.equals("1")) {
-
             System.out.println("Please enter your username");
             String username = sc.nextLine();
 
@@ -48,8 +42,8 @@ public static void main(String[] args) {
             User temp = new User("x", "x");
 
             if(temp.login(filePathUsers, filePathTrainers))
-
             {
+                isTrainer = checkIfTrainer(temp.getUsername(), temp.getPassword(), filePathTrainers);
                 System.out.println("Login successful! Welcome to Gym Fit.");
             }
             else
@@ -75,7 +69,7 @@ public static void main(String[] args) {
             sc.nextLine();
 
             switch (opcion) {
-                case 1 -> menuEntrenamientos(sc);
+                case 1 -> menuEntrenamientos(sc, isTrainer);
                 case 2 -> menuSesiones(sc);
                 case 3 -> menuForo(sc);
                 case 0 -> System.out.println("Hasta pronto!");
@@ -84,9 +78,24 @@ public static void main(String[] args) {
         } while (opcion != 0);
     }
 
-static void menuEntrenamientos(Scanner sc) {
+static void menuEntrenamientos(Scanner sc, boolean isTrainer) {
     TrainingMenu tm = new TrainingMenu();
-    tm.displayMenu();
+    tm.displayMenu(isTrainer);
+}
+
+private static boolean checkIfTrainer(String username, String password, String filePathTrainers) {
+    boolean isTrainer = false;
+    try (BufferedReader br = new BufferedReader(new FileReader(filePathTrainers))) {
+        String line;
+        while ((line = br.readLine()) != null && !isTrainer) {
+            if (line.contains(username) && line.contains(password)) {
+                isTrainer = true;
+            }
+        }
+    } catch (IOException e) {
+        System.out.println("Error");
+    }
+    return isTrainer;
 }
 
 static void menuSesiones(Scanner sc) {
