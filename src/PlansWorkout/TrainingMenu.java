@@ -12,7 +12,7 @@ public class TrainingMenu {
             System.out.println("Training Menu:");
             System.out.println("1. Create a new workout plan");
             System.out.println("2. View existing workout plans");
-            System.out.println("3. Exit");
+            System.out.println("3. Go back");
             opc = sc.nextInt();
             sc.nextLine();
 

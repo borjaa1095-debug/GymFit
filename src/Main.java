@@ -62,7 +62,7 @@ public static void main(String[] args) {
             System.out.println("===== PRINCIPAL MENU - GYMFIT =====");
             System.out.println("1. Workout plans");
             System.out.println("2. Sessions and Payments");
-            System.out.println("3. Foro");
+            System.out.println("3. Forum");
             System.out.println("0. Exit");
             System.out.print("Choose: ");
             opcion = sc.nextInt();
