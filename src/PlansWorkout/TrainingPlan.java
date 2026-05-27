@@ -33,7 +33,7 @@ public class TrainingPlan {
     public void addWorkout(Workout workout) {
         workouts.add(workout);
         try (PrintWriter printWriter = new PrintWriter(new FileWriter("src/PlansWorkout/workouts.txt", true))) {
-            printWriter.println(workout.getWorkoutName() + ", " + workout.getWorkoutDescription() + ", " + workout.getWorkoutDurationMin());
+            printWriter.println(workout.getWorkoutName() + ", " + workout.getWorkoutDescription() + ", " + workout.getWorkoutDurationMin() + ", " + goal);
         } catch (IOException e) {
             System.out.println("Error");
         }

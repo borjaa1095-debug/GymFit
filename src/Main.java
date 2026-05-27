@@ -1,3 +1,4 @@
+import PlansWorkout.TrainingMenu;
 import UsersAuth.User;
 import UsersAuth.User;
 import UsersAuth.Trainer;
@@ -84,16 +85,8 @@ public static void main(String[] args) {
     }
 
 static void menuEntrenamientos(Scanner sc) {
-    List<Workout> workouts = new ArrayList<>();
-    workouts.add(new Workout("Cardio", "Correr 30 minutos", 30));
-    workouts.add(new Workout("Fuerza", "Pesas y sentadillas", 45));
-    TrainingPlan plan = new TrainingPlan("Pérdida de peso", workouts);
-
-    System.out.println("\n--- Plan: " + plan.getGoal() + " ---");
-    for (Workout w : plan.getWorkouts()) {
-        w.displayWorkoutInfo();
-        System.out.println();
-    }
+    TrainingMenu tm = new TrainingMenu();
+    tm.displayMenu();
 }
 
 static void menuSesiones(Scanner sc) {
