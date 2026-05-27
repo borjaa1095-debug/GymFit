@@ -8,7 +8,7 @@ public static void main(String[] args) {
     String filePathTrainers = "Trainers.txt";
     String ans = "";
     boolean isTrainer = false;
-    System.out.println("Welcome to C Gym Fit!");
+    System.out.println("Welcome to Gym Fit APP!");
 
 
     while (ans == null || (!ans.equals("1") && !ans.equals("2"))) {
@@ -59,12 +59,12 @@ public static void main(String[] args) {
 
         int opcion;
         do {
-            System.out.println("===== MENÚ PRINCIPAL - GYMFIT =====");
-            System.out.println("1. Ver entrenamientos");
-            System.out.println("2. Ver sesiones y pagos");
+            System.out.println("===== PRINCIPAL MENU - GYMFIT =====");
+            System.out.println("1. Workout plans");
+            System.out.println("2. Sessions and Payments");
             System.out.println("3. Foro");
-            System.out.println("0. Salir");
-            System.out.print("Elige una opción: ");
+            System.out.println("0. Exit");
+            System.out.print("Choose: ");
             opcion = sc.nextInt();
             sc.nextLine();
 
@@ -72,8 +72,8 @@ public static void main(String[] args) {
                 case 1 -> menuEntrenamientos(sc, isTrainer);
                 case 2 -> menuSesiones(sc);
                 case 3 -> menuForo(sc);
-                case 0 -> System.out.println("Hasta pronto!");
-                default -> System.out.println("Opción no válida.");
+                case 0 -> System.out.println("See you soon!");
+                default -> System.out.println("Error");
             }
         } while (opcion != 0);
     }
@@ -100,7 +100,7 @@ private static boolean checkIfTrainer(String username, String password, String f
 
 static void menuSesiones(Scanner sc) {
     // Persona 3 completará ClassSession y Payment con su lógica
-    System.out.println("\n--- Sesiones y Pagos ---");
+    System.out.println("\n--- Sessions and Payments ---");
     System.out.println("(Pendiente de implementación por Persona 3)");
 }
 
@@ -111,11 +111,11 @@ static void menuForo(Scanner sc) {
     int opcion;
     do {
         System.out.println("\n--- FORO ---");
-        System.out.println("1. Ver posts");
-        System.out.println("2. Crear post");
-        System.out.println("3. Comentar un post");
-        System.out.println("0. Volver");
-        System.out.print("Opción: ");
+        System.out.println("1. See posts");
+        System.out.println("2. Create post");
+        System.out.println("3. Comment a post");
+        System.out.println("0. Go back");
+        System.out.print("Choose: ");
         opcion = sc.nextInt();
         sc.nextLine();
 
@@ -124,18 +124,18 @@ static void menuForo(Scanner sc) {
                 for (ForumPost p : posts) p.displayPost();
             }
             case 2 -> {
-                System.out.print("Título: ");
+                System.out.print("Title: ");
                 String titulo = sc.nextLine();
-                System.out.print("Contenido: ");
+                System.out.print("Content: ");
                 String contenido = sc.nextLine();
-                posts.add(new ForumPost(posts.size() + 1, "usuario", titulo, contenido));
-                System.out.println("Post creado!");
+                posts.add(new ForumPost(posts.size() + 1, "user", titulo, contenido));
+                System.out.println("Post created!");
             }
             case 3 -> {
-                System.out.print("ID del post: ");
+                System.out.print("ID post: ");
                 int id = sc.nextInt();
                 sc.nextLine();
-                System.out.print("Comentario: ");
+                System.out.print("Comment: ");
                 String comentario = sc.nextLine();
                 posts.stream()
                         .filter(p -> p.getId() == id)
@@ -143,14 +143,14 @@ static void menuForo(Scanner sc) {
                         .ifPresentOrElse(
                                 p -> {
                                     p.addComment(comentario);
-                                    System.out.println("Comentario añadido.");
+                                    System.out.println("Comement added.");
                                 },
-                                () -> System.out.println("Post no encontrado.")
+                                () -> System.out.println("Post not found.")
                         );
             }
             case 0 -> {
             }
-            default -> System.out.println("Opción no válida.");
+            default -> System.out.println("Error");
         }
     } while (opcion != 0);
 }

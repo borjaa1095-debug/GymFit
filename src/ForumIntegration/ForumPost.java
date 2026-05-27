@@ -38,10 +38,10 @@ public class ForumPost {
 
     public void displayPost() {
         System.out.println("=== " + title + " ===");
-        System.out.println("Autor: " + author);
-        System.out.println("Contenido: " + content);
+        System.out.println("Author: " + author);
+        System.out.println("Content: " + content);
         if (!comments.isEmpty()) {
-            System.out.println("Comentarios:");
+            System.out.println("Comments:");
             for (String c : comments) {
                 System.out.println("  - " + c);
             }
