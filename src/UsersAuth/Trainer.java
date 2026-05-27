@@ -3,9 +3,8 @@ package UsersAuth;
 public class Trainer extends UserBase {
 
     private String specialization;
-    public Trainer(String username, String email, int id, String password, String specialization) {
-        super(username, email, id, password);
-        this.specialization = specialization;
+    public Trainer(String username, String password) {
+        super(username, password);
     }
 
     public String getSpecialization() {
@@ -16,10 +15,4 @@ public class Trainer extends UserBase {
     }
 
 
-
-
-    @Override
-    public boolean register(String file) {
-        return false;
-    }
 }

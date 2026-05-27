@@ -9,22 +9,62 @@ import ForumIntegration.ForumPost;
 
 public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
-    String filePath = "Users.txt";
+    String filePathUsers = "Users.txt";
+    String filePathTrainers = "Trainers.txt";
+    String ans = "";
+    System.out.println("Welcome to C Gym Fit!");
 
-    // Login
-    User u = new User("x", "x", 0, "x") {};
-    boolean acceso = u.login(filePath);
 
-    if (!acceso) {
-        System.out.println("Acceso denegado.");
+    while (ans == null || (!ans.equals("1") && !ans.equals("2"))) {
+
+        System.out.println("Please enter your choice");
+        System.out.println("1. Register");
+        System.out.println("2. Login");
+        ans = sc.nextLine();
+
+        if (ans.equals("1")) {
+
+            System.out.println("Please enter your username");
+            String username = sc.nextLine();
+
+            System.out.println("Please enter your password");
+            String password = sc.nextLine();
+
+            User newUser = new User(username, password);
+
+            boolean registered = newUser.register(filePathUsers, filePathTrainers);
+
+            if (registered) {
+                System.out.println("Registration successful! You can now log in.");
+            } else {
+                System.out.println("Registration failed. Please try again.");
+            }
+
+            ans = null;
+        }
+        else if (ans.equals("2")) {
+
+            User temp = new User("x", "x");
+
+            if(temp.login(filePathUsers, filePathTrainers))
+
+            {
+                System.out.println("Login successful! Welcome to Gym Fit.");
+            }
+            else
+            {
+                System.out.println("Login failed. Please check your credentials and try again.");
+            }
+        }
+        else {
+            System.out.println("Invalid input. Please enter 1 or 2.");
+            ans = null;
+        }
     }
-    else
-    {
-        System.out.println("Acceso concedido. Bienvenido!");
 
         int opcion;
         do {
-            System.out.println("\n===== MENÚ PRINCIPAL - GYMFIT =====");
+            System.out.println("===== MENÚ PRINCIPAL - GYMFIT =====");
             System.out.println("1. Ver entrenamientos");
             System.out.println("2. Ver sesiones y pagos");
             System.out.println("3. Foro");
@@ -42,7 +82,7 @@ public static void main(String[] args) {
             }
         } while (opcion != 0);
     }
-}
+
 static void menuEntrenamientos(Scanner sc) {
     List<Workout> workouts = new ArrayList<>();
     workouts.add(new Workout("Cardio", "Correr 30 minutos", 30));
