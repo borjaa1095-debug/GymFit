@@ -1,4 +1,6 @@
 import PlansWorkout.TrainingMenu;
+import PlansWorkout.TrainingPlan;
+import PlansWorkout.Workout;
 import UsersAuth.User;
 import ForumIntegration.ForumPost;
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ public class Main {
         String filePathTrainers = "Trainers.txt";
         String ans = null;
         String userType = "none";
+        List<TrainingPlan> allPlans = new ArrayList<>();
 
         System.out.println("Welcome to C Gym Fit!");
 
@@ -70,6 +73,7 @@ public class Main {
             System.out.println("1. View workouts");
             System.out.println("2. View sessions and payments");
             System.out.println("3. Forum");
+            System.out.println("4. Create training plan");
             System.out.println("0. Exit");
             System.out.print("Choose an option: ");
             option = sc.nextInt();
@@ -79,10 +83,41 @@ public class Main {
                 case 1 -> menuWorkouts(sc, userType.equals("trainer"));
                 case 2 -> menuSessions(sc);
                 case 3 -> menuForum(sc);
+                case 4 -> createPlan(sc, allPlans, userType.equals("trainer"));
                 case 0 -> System.out.println("Goodbye!");
                 default -> System.out.println("Invalid option.");
             }
         } while (option != 0);
+    }
+
+    private static void createPlan(Scanner sc, List<TrainingPlan> allPlans, boolean isTrainer) {
+
+        if (!isTrainer) {
+            System.out.println("Only trainers can create workout plans.");
+            return;
+        }
+
+        System.out.println("Enter the workout name:");
+        String name = sc.nextLine();
+
+        System.out.println("Enter the workout description:");
+        String description = sc.nextLine();
+
+        System.out.println("Enter the workout duration in minutes:");
+        int duration = sc.nextInt();
+        sc.nextLine();
+
+        System.out.println("Enter the training goal:");
+        String goal = sc.nextLine();
+
+        Workout workout = new Workout(name, description, duration);
+
+        TrainingPlan plan = new TrainingPlan(goal, new ArrayList<>());
+        plan.addWorkout(workout);
+
+        allPlans.add(plan);
+
+        System.out.println("Training plan created successfully!");
     }
 
     static void menuWorkouts(Scanner sc, boolean isTrainer) {
