@@ -6,6 +6,7 @@ import ForumIntegration.ForumPost;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import SessionPayment.SessionMenu;
 
 public class Main {
 
@@ -126,8 +127,8 @@ public class Main {
     }
 
     static void menuSessions(Scanner sc) {
-        System.out.println("\n--- Sessions and Payments ---");
-        System.out.println("(Pending implementation)");
+        SessionMenu sessionMenu = new SessionMenu();
+        sessionMenu.showMenu();
     }
 
     static void menuForum(Scanner sc) {
