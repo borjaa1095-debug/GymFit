@@ -16,14 +16,14 @@ public class SessionMenu {
         int opcion = -1;
         while (opcion != 0) {
             System.out.println("\n===== MENU SESIONES Y PAGOS =====");
-            System.out.println("1. Crear nueva sesión");
-            System.out.println("2. Ver todas las sesiones");
-            System.out.println("3. Registrar participante en sesión");
-            System.out.println("4. Eliminar participante de sesión");
-            System.out.println("5. Procesar pago");
-            System.out.println("6. Ver pagos");
-            System.out.println("0. Volver");
-            System.out.print("Elige opción: ");
+            System.out.println("1. Create new session");
+            System.out.println("2. See all sesiones");
+            System.out.println("3. Register participant on the session");
+            System.out.println("4. Delete participant from the session");
+            System.out.println("5. Process payment");
+            System.out.println("6. See all payments");
+            System.out.println("0. Go back");
+            System.out.print("Choose: ");
             opcion = leerInt();
 
             if (opcion == 1) {
@@ -39,32 +39,32 @@ public class SessionMenu {
             } else if (opcion == 6) {
                 verPagos();
             } else if (opcion == 0) {
-                System.out.println("Volviendo al menú principal...");
+                System.out.println("Going back to the menu...");
             } else {
-                System.out.println("Opción no válida.");
+                System.out.println("Error");
             }
         }
     }
 
     private void crearSesion() {
-        System.out.print("Nombre de la clase: ");
+        System.out.print("Name of the class: ");
         String nombre = sc.nextLine();
         System.out.print("Trainer: ");
         String trainer = sc.nextLine();
-        System.out.print("Fecha (dd/mm/yyyy): ");
+        System.out.print("Date (dd/mm/yyyy): ");
         String fecha = sc.nextLine();
-        System.out.print("Capacidad máxima: ");
+        System.out.print("Maximum capacity: ");
         int capacidad = leerInt();
 
         ClassSession session = new ClassSession(nextSessionId, nombre, trainer, fecha, capacidad);
         nextSessionId++;
         sessions.add(session);
-        System.out.println("Sesión creada con ID " + session.getSessionId());
+        System.out.println("Session created with ID " + session.getSessionId());
     }
 
     private void verSesiones() {
         if (sessions.isEmpty()) {
-            System.out.println("No hay sesiones registradas.");
+            System.out.println("There is no session registered.");
         } else {
             for (ClassSession s : sessions) {
                 s.displaySessionInfo();
@@ -75,15 +75,15 @@ public class SessionMenu {
 
     private void registrarParticipante() {
         if (sessions.isEmpty()) {
-            System.out.println("No hay sesiones disponibles.");
+            System.out.println("There is no session right now.");
         } else {
-            System.out.print("ID de la sesión: ");
+            System.out.print("ID session: ");
             int id = leerInt();
             ClassSession session = buscarSesion(id);
             if (session == null) {
-                System.out.println("Sesión no encontrada.");
+                System.out.println("Sesión not found.");
             } else {
-                System.out.print("Nombre del participante: ");
+                System.out.print("Participant name: ");
                 String nombre = sc.nextLine();
                 session.addParticipant(nombre);
             }
@@ -92,15 +92,15 @@ public class SessionMenu {
 
     private void eliminarParticipante() {
         if (sessions.isEmpty()) {
-            System.out.println("No hay sesiones disponibles.");
+            System.out.println("There is no session available.");
         } else {
-            System.out.print("ID de la sesión: ");
+            System.out.print("ID session: ");
             int id = leerInt();
             ClassSession session = buscarSesion(id);
             if (session == null) {
-                System.out.println("Sesión no encontrada.");
+                System.out.println("Sesión not found.");
             } else {
-                System.out.print("Nombre del participante a eliminar: ");
+                System.out.print("Participant name to delete: ");
                 String nombre = sc.nextLine();
                 session.removeParticipant(nombre);
             }
@@ -108,13 +108,13 @@ public class SessionMenu {
     }
 
     private void procesarPago() {
-        System.out.print("Nombre de usuario: ");
+        System.out.print("Username: ");
         String usuario = sc.nextLine();
-        System.out.print("Importe (€): ");
+        System.out.print("Import (€): ");
         double importe = leerDouble();
 
-        System.out.println("Método de pago:");
-        System.out.println("1. Tarjeta  2. Efectivo  3. Transferencia");
+        System.out.println("Payment method:");
+        System.out.println("1. Credit card  2. Cash  3. Transfer");
         int metodoOpcion = leerInt();
         String metodo;
         if (metodoOpcion == 1) {
@@ -128,7 +128,7 @@ public class SessionMenu {
         }
 
         if (importe <= 0) {
-            System.out.println("Importe inválido.");
+            System.out.println("Invalid import.");
         } else {
             Payment pago = new Payment(nextPaymentId, usuario, importe, metodo);
             nextPaymentId++;
@@ -139,7 +139,7 @@ public class SessionMenu {
 
     private void verPagos() {
         if (payments.isEmpty()) {
-            System.out.println("No hay pagos registrados.");
+            System.out.println("There is no payments registered.");
         } else {
             for (Payment p : payments) {
                 p.displayPaymentInfo();
@@ -165,7 +165,7 @@ public class SessionMenu {
         try {
             result = Integer.parseInt(sc.nextLine().trim());
         } catch (NumberFormatException e) {
-            System.out.println("Entrada inválida, usando 0.");
+            System.out.println("Invalid input or using 0.");
         }
         return result;
     }
@@ -175,7 +175,7 @@ public class SessionMenu {
         try {
             result = Double.parseDouble(sc.nextLine().trim());
         } catch (NumberFormatException e) {
-            System.out.println("Entrada inválida, usando 0.");
+            System.out.println("Invalid input or using 0.");
         }
         return result;
     }

@@ -67,6 +67,8 @@ public abstract class UserBase {
                     String filePass = parts[1];
 
                     if (inputUser.equals(fileUser) && inputPass.equals(filePass)) {
+                        this.setUsername(inputUser);
+                        this.setPassword(inputPass);
                         result = true;
                     }
                 }

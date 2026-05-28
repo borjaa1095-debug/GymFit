@@ -30,7 +30,7 @@ public class Payment {
 
     public void setAmount(double amount) {
         if (amount < 0) {
-            System.out.println("El importe no puede ser negativo.");
+            System.out.println("The import can't be negative.");
         } else {
             this.amount = amount;
         }
@@ -39,12 +39,12 @@ public class Payment {
     public boolean processPayment() {
         boolean result = false;
         if (paid) {
-            System.out.println("Este pago ya fue procesado.");
+            System.out.println("This payment has been already processed.");
         } else if (amount <= 0) {
-            System.out.println("Importe inválido. No se puede procesar el pago.");
+            System.out.println("Invalid import. The payment can't be processed.");
         } else {
             paid = true;
-            System.out.println("Pago procesado correctamente:");
+            System.out.println("Payment processed correctly:");
             displayPaymentInfo();
             result = true;
         }
@@ -52,11 +52,11 @@ public class Payment {
     }
 
     public void displayPaymentInfo() {
-        System.out.println("=== Pago ID: " + paymentId + " ===");
-        System.out.println("Usuario: " + username);
-        System.out.println("Importe: " + amount + "€");
-        System.out.println("Método: " + method);
-        System.out.println("Fecha: " + date);
-        System.out.println("Estado: " + (paid ? "PAGADO" : "PENDIENTE"));
+        System.out.println("=== Payment ID: " + paymentId + " ===");
+        System.out.println("User: " + username);
+        System.out.println("Import: " + amount + "€");
+        System.out.println("Method: " + method);
+        System.out.println("Date: " + date);
+        System.out.println("Status: " + (paid ? "PAGADO" : "PENDIENTE"));
     }
 }
