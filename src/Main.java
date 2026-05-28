@@ -1,68 +1,72 @@
 import PlansWorkout.TrainingMenu;
 import UsersAuth.User;
-import UsersAuth.User;
-import UsersAuth.Trainer;
-import PlansWorkout.TrainingPlan;
-import PlansWorkout.Workout;
-import SessionPayment.ClassSession;
-import SessionPayment.Payment;
 import ForumIntegration.ForumPost;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
-public static void main(String[] args) {
-    Scanner sc = new Scanner(System.in);
-    String filePathUsers = "Users.txt";
-    String filePathTrainers = "Trainers.txt";
-    String ans = "";
-    System.out.println("Welcome to C Gym Fit!");
+public class Main {
 
+    public static void main(String[] args) {
 
-    while (ans == null || (!ans.equals("1") && !ans.equals("2"))) {
+        Scanner sc = new Scanner(System.in);
+        String filePathUsers = "Users.txt";
+        String filePathTrainers = "Trainers.txt";
+        String ans = null;
 
-        System.out.println("Please enter your choice");
-        System.out.println("1. Register");
-        System.out.println("2. Login");
-        ans = sc.nextLine();
+        System.out.println("Welcome to C Gym Fit!");
 
-        if (ans.equals("1")) {
+        // ============================
+        //   REGISTER / LOGIN MENU
+        // ============================
+        while (ans == null || (!ans.equals("1") && !ans.equals("2"))) {
 
-            System.out.println("Please enter your username");
-            String username = sc.nextLine();
+            System.out.println("Please enter your choice");
+            System.out.println("1. Register");
+            System.out.println("2. Login");
+            ans = sc.nextLine();
 
-            System.out.println("Please enter your password");
-            String password = sc.nextLine();
+            if (ans.equals("1")) {
 
-            User newUser = new User(username, password);
+                System.out.println("Please enter your username");
+                String username = sc.nextLine();
 
-            boolean registered = newUser.register(filePathUsers, filePathTrainers);
+                System.out.println("Please enter your password");
+                String password = sc.nextLine();
 
-            if (registered) {
-                System.out.println("Registration successful! You can now log in.");
-            } else {
-                System.out.println("Registration failed. Please try again.");
+                User newUser = new User(username, password);
+
+                boolean registered = newUser.register(filePathUsers, filePathTrainers);
+
+                if (registered) {
+                    System.out.println("Registration successful! You can now log in.");
+                } else {
+                    System.out.println("Registration failed. Please try again.");
+                }
+
+                ans = null; // repeat menu
             }
+            else if (ans.equals("2")) {
 
-            ans = null;
-        }
-        else if (ans.equals("2")) {
+                User temp = new User("x", "x");
 
-            User temp = new User("x", "x");
+                if (temp.login(filePathUsers, filePathTrainers)) {
+                    System.out.println("Login successful! Welcome to Gym Fit.");
+                } else {
+                    System.out.println("Login failed. Please check your credentials and try again.");
+                }
 
-            if(temp.login(filePathUsers, filePathTrainers))
-
-            {
-                System.out.println("Login successful! Welcome to Gym Fit.");
+                ans = null; // repeat menu
             }
-            else
-            {
-                System.out.println("Login failed. Please check your credentials and try again.");
+            else {
+                System.out.println("Invalid input. Please enter 1 or 2.");
+                ans = null;
             }
         }
-        else {
-            System.out.println("Invalid input. Please enter 1 or 2.");
-            ans = null;
-        }
-    }
 
+        // ============================
+        //   MAIN MENU
+        // ============================
         int opcion;
         do {
             System.out.println("===== MENÚ PRINCIPAL - GYMFIT =====");
@@ -84,66 +88,72 @@ public static void main(String[] args) {
         } while (opcion != 0);
     }
 
-static void menuEntrenamientos(Scanner sc) {
-    TrainingMenu tm = new TrainingMenu();
-    tm.displayMenu();
+    // ============================
+    //   MENÚ ENTRENAMIENTOS
+    // ============================
+    static void menuEntrenamientos(Scanner sc) {
+        TrainingMenu tm = new TrainingMenu();
+        tm.displayMenu();
+    }
+
+    // ============================
+    //   MENÚ SESIONES
+    // ============================
+    static void menuSesiones(Scanner sc) {
+        System.out.println("\n--- Sesiones y Pagos ---");
+        System.out.println("(Pendiente de implementación por Persona 3)");
+    }
+
+    // ============================
+    //   MENÚ FORO
+    // ============================
+    static void menuForo(Scanner sc) {
+        List<ForumPost> posts = new ArrayList<>();
+        posts.add(new ForumPost(1, "admin", "Bienvenidos", "Este es el foro de GymFit."));
+
+        int opcion;
+        do {
+            System.out.println("\n--- FORO ---");
+            System.out.println("1. Ver posts");
+            System.out.println("2. Crear post");
+            System.out.println("3. Comentar un post");
+            System.out.println("0. Volver");
+            System.out.print("Opción: ");
+            opcion = sc.nextInt();
+            sc.nextLine();
+
+            switch (opcion) {
+                case 1 -> {
+                    for (ForumPost p : posts) p.displayPost();
+                }
+                case 2 -> {
+                    System.out.print("Título: ");
+                    String titulo = sc.nextLine();
+                    System.out.print("Contenido: ");
+                    String contenido = sc.nextLine();
+                    posts.add(new ForumPost(posts.size() + 1, "usuario", titulo, contenido));
+                    System.out.println("Post creado!");
+                }
+                case 3 -> {
+                    System.out.print("ID del post: ");
+                    int id = sc.nextInt();
+                    sc.nextLine();
+                    System.out.print("Comentario: ");
+                    String comentario = sc.nextLine();
+                    posts.stream()
+                            .filter(p -> p.getId() == id)
+                            .findFirst()
+                            .ifPresentOrElse(
+                                    p -> {
+                                        p.addComment(comentario);
+                                        System.out.println("Comentario añadido.");
+                                    },
+                                    () -> System.out.println("Post no encontrado.")
+                            );
+                }
+                case 0 -> {}
+                default -> System.out.println("Opción no válida.");
+            }
+        } while (opcion != 0);
+    }
 }
-
-static void menuSesiones(Scanner sc) {
-    // Persona 3 completará ClassSession y Payment con su lógica
-    System.out.println("\n--- Sesiones y Pagos ---");
-    System.out.println("(Pendiente de implementación por Persona 3)");
-}
-
-static void menuForo(Scanner sc) {
-    List<ForumPost> posts = new ArrayList<>();
-    posts.add(new ForumPost(1, "admin", "Bienvenidos", "Este es el foro de GymFit."));
-
-    int opcion;
-    do {
-        System.out.println("\n--- FORO ---");
-        System.out.println("1. Ver posts");
-        System.out.println("2. Crear post");
-        System.out.println("3. Comentar un post");
-        System.out.println("0. Volver");
-        System.out.print("Opción: ");
-        opcion = sc.nextInt();
-        sc.nextLine();
-
-        switch (opcion) {
-            case 1 -> {
-                for (ForumPost p : posts) p.displayPost();
-            }
-            case 2 -> {
-                System.out.print("Título: ");
-                String titulo = sc.nextLine();
-                System.out.print("Contenido: ");
-                String contenido = sc.nextLine();
-                posts.add(new ForumPost(posts.size() + 1, "usuario", titulo, contenido));
-                System.out.println("Post creado!");
-            }
-            case 3 -> {
-                System.out.print("ID del post: ");
-                int id = sc.nextInt();
-                sc.nextLine();
-                System.out.print("Comentario: ");
-                String comentario = sc.nextLine();
-                posts.stream()
-                        .filter(p -> p.getId() == id)
-                        .findFirst()
-                        .ifPresentOrElse(
-                                p -> {
-                                    p.addComment(comentario);
-                                    System.out.println("Comentario añadido.");
-                                },
-                                () -> System.out.println("Post no encontrado.")
-                        );
-            }
-            case 0 -> {
-            }
-            default -> System.out.println("Opción no válida.");
-        }
-    } while (opcion != 0);
-}
-
-
