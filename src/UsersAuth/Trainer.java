@@ -43,7 +43,7 @@ public class Trainer extends UserBase {
             sc.nextLine();
 
             // Create workout using your constructor
-            Workout w = new Workout(goal, workouts, name, description, duration);
+            Workout w = new Workout(name, description, duration);
 
             // Add workout to plan (this also writes to workouts.txt)
             plan.addWorkout(w);

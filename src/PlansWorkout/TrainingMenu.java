@@ -1,5 +1,6 @@
 package PlansWorkout;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TrainingMenu {
@@ -32,7 +33,7 @@ public class TrainingMenu {
                         String goal = sc.nextLine();
 
                         Workout workout = new Workout(name, description, duration);
-                        lastPlan = new TrainingPlan(goal);
+                        lastPlan = new TrainingPlan(goal, new ArrayList<>());
                         lastPlan.addWorkout(workout);
                         System.out.println("Plan saved!");
                         break;

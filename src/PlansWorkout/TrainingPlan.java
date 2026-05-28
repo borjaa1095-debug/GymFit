@@ -10,9 +10,9 @@ public class TrainingPlan {
     String goal;
     List<Workout> workouts;
 
-    public TrainingPlan(String goal) {
+    public TrainingPlan(String goal, List<Workout> workouts) {
         this.goal = goal;
-        this.workouts = new ArrayList<>();
+        this.workouts = workouts;
     }
 
     public String getGoal() {

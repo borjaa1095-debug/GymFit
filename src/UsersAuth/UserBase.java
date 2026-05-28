@@ -34,7 +34,7 @@ public abstract class UserBase {
         this.password = password;
     }
 
-    public boolean login(String filePathUsers, String filePathTrainers) {
+    public String login(String filePathUsers, String filePathTrainers) {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Login as (user/trainer): ");
@@ -45,7 +45,6 @@ public abstract class UserBase {
             type = sc.nextLine().toLowerCase();
         }
 
-        // Select correct file
         String targetFile = type.equals("user") ? filePathUsers : filePathTrainers;
 
         System.out.print("Enter username: ");
@@ -54,7 +53,7 @@ public abstract class UserBase {
         System.out.print("Enter password: ");
         String inputPass = sc.nextLine();
 
-        boolean result = false;
+        String result = "none";
 
         try (BufferedReader br = new BufferedReader(new FileReader(targetFile))) {
             String line;
@@ -63,13 +62,11 @@ public abstract class UserBase {
                 String[] parts = line.split(":");
 
                 if (parts.length == 2) {
-                    String fileUser = parts[0];
-                    String filePass = parts[1];
+                    boolean userMatch = inputUser.equals(parts[0]);
+                    boolean passMatch = inputPass.equals(parts[1]);
 
-                    if (inputUser.equals(fileUser) && inputPass.equals(filePass)) {
-                        this.setUsername(inputUser);
-                        this.setPassword(inputPass);
-                        result = true;
+                    if (userMatch && passMatch) {
+                        result = type;
                     }
                 }
             }
@@ -78,9 +75,10 @@ public abstract class UserBase {
             System.out.println("Error reading file: " + e.getMessage());
         }
 
-        System.out.println("Login attempt (" + type + ") for user: " + inputUser + " - " + (result ? "Success" : "Failure"));
+
         return result;
     }
+
 
 
     public boolean register(String filePathUsers, String filePathTrainers) {
